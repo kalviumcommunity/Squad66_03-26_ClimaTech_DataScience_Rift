@@ -1,4 +1,4 @@
-# *$🌾$ Project Plan: Smart Agriculture Prediction System*
+# $🌾$ *Project Plan: Smart Agriculture Prediction System*
 ## *Problem Statement & Solution Overview*
 
 >$📌$ $Problem$
