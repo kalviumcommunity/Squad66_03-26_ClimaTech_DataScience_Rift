@@ -9,3 +9,6 @@
 ## ***Assignment 4.7*** 
 
 >$Launching$ $Jupyter$ $Notebook$ $and$ $Understanding$ $the$ $Home$ $Interface$
+
+## ***Assignment 4.8***
+>$Understanding$ $Notebook$ $Cells:$ $Code$ $vs$ $Markdown$
