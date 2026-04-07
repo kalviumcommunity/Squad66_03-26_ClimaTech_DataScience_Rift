@@ -12,3 +12,6 @@
 
 ## ***Assignment 4.8***
 >$Understanding$ $Notebook$ $Cells:$ $Code$ $vs$ $Markdown$
+
+## ***Assignment 4.9***
+>$Running,$ $Restarting,$ $and$ $Interrupting$ $Jupyter$ $Kernels$
