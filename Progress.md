@@ -33,3 +33,6 @@
 
 ## ***Assignment 4.15*** (Collections.md, collections_demo.py)
 >$Working$ $with$ $Python$ $Lists,$ $Tuples,$ $and$ $Dictionaries$
+
+## ***Assignment 4.16*** (Conditionals.md, conditionals_demo.py)
+>$Writing$ $Conditional$ $Statements$ $for$ $Data$ $Logic$
