@@ -30,3 +30,6 @@
 
 ## ***Assignment 4.14*** (Num_Str_Datatypes.md, data_types_demo.py)
 >$Understanding$ $Python$ $Numeric$ $and$ $String$ $Data$ $Types$
+
+## ***Assignment 4.15*** (Collections.md, collections_demo.py)
+>$Working$ $with$ $Python$ $Lists,$ $Tuples,$ $and$ $Dictionaries$
