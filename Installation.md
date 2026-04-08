@@ -41,6 +41,8 @@
 - *Python executes without errors*
 - *Environment is ready for Data Science work*
 
+---
+
 >$🚀$ $PR$ $DETAILS$
 
 $🔹$ $PR$ $Title$

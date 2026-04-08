@@ -88,6 +88,8 @@
 
 ***This confirms readiness to use Jupyter for Data Science workflows.***
 
+---
+
 >$🚀$ $PR$ $DETAILS$
 
 $🔹$ $PR$ $Title$
