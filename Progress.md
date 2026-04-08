@@ -25,5 +25,8 @@
 ## ***Assignment 4.12*** (Data-Artifact.md)
 >$Organizing$ $Raw$ $Data,$ $Processed$ $Data,$ $and$ $Output$ $Artifacts$
 
-## ***Assignment 4.13*** ()
->$$
+## ***Assignment 4.13*** (Py_Script.md, first_analysis.py)
+>$Creating$ $and$ $Running$ $a$ $First$ $Python$ $Script$ $for$ $Data$ $Analysis$
+
+## ***Assignment 4.14*** (Num_Str_Datatypes.md, data_types_demo.py)
+>$Understanding$ $Python$ $Numeric$ $and$ $String$ $Data$ $Types$
