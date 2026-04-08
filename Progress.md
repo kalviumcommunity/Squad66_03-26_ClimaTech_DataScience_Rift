@@ -18,3 +18,6 @@
 
 ## ***Assignment 4.10*** (JupyterFormat.md)
 >$Writing$ $Markdown$ $for$ $Headings,$ $Lists,$ $and$ $Code$ $Blocks$ $in$ $Notebooks$
+
+## ***Assignment 4.11*** (FolderStructure.md)
+>$Creating$ $a$ $Project$ $Folder$ $Structure$ $for$ $Data$ $Science$ $Work$
