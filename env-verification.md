@@ -42,6 +42,9 @@
 - *Jupyter Notebook/Lab launches and executes Python code*
 
 ***This confirms the system is ready for Data Science workflows.***
+
+---
+
 >$🚀$ $PR$ $DETAILS$
 - $🔹$ $PR$ $Title$
 - $Milestone$ $2:$ $Python,$ $Conda$ & $Jupyter$ $Verification$
