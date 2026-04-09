@@ -48,3 +48,6 @@
 
 ## ***Assignment 4.20*** (Readability.md, readability_demo.py)
 >$Writing$ $Readable$ $Variable$ $Names$ $and$ $Comments$ $(PEP8$ $Basics)$
+
+## ***Assignment 4.21*** (, structured_script_demo.py)
+>$Structuring$ $Python$ $Code$ $for$ $Readability$ $and$ $Reuse$
