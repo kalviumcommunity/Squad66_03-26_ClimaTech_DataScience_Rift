@@ -36,3 +36,6 @@
 
 ## ***Assignment 4.16*** (Conditionals.md, conditionals_demo.py)
 >$Writing$ $Conditional$ $Statements$ $for$ $Data$ $Logic$
+
+## ***Assignment 4.17*** (Loops.md, loops_demo.py)
+>$Using$ $for$ $and$ $while$ $Loops$ $for$ $Iterative$ $Data$ $Processing$
