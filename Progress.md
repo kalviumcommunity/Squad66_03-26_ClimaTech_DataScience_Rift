@@ -39,3 +39,6 @@
 
 ## ***Assignment 4.17*** (Loops.md, loops_demo.py)
 >$Using$ $for$ $and$ $while$ $Loops$ $for$ $Iterative$ $Data$ $Processing$
+
+## ***Assignment 4.18*** (Functions.md, functions_demo.py)
+>$Defining$ $and$ $Calling$ $Python$ $Functions$
