@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIFT - Agricultural Climate & Market Analysis</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #065f46 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 253, 250, 0.95) 100%);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-left: 5px solid #10b981;
+        }
+
+        header h1 {
+            color: #1e3a8a;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        header h1::before {
+            content: "🚜";
+            font-size: 1.2em;
+        }
+
+        header p {
+            color: #059669;
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-card.blue {
+            border-left-color: #3b82f6;
+        }
+
+        .stat-card.green {
+            border-left-color: #10b981;
+        }
+
+        .stat-card.orange {
+            border-left-color: #f97316;
+        }
+
+        .stat-card.purple {
+            border-left-color: #a855f7;
+        }
+
+        .stat-card.red {
+            border-left-color: #ef4444;
+        }
+
+        .stat-card h3 {
+            color: #666;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .stat-card .value {
+            color: #1e3a8a;
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-card .unit {
+            color: #999;
+            font-size: 0.85em;
+        }
+
+        /* Insights Section */
+        .insights-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .insights-section h2 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .insights-section h2::before {
+            content: "📊";
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .insight-card {
+            background: linear-gradient(135deg, #f0f9ff 0%, #ecfdf5 100%);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #10b981;
+        }
+
+        .insight-card h4 {
+            color: #1e3a8a;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .insight-card p {
+            color: #555;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        .insight-number {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-right: 8px;
+            font-size: 0.9em;
+        }
+
+        /* Correlations */
+        .correlations {
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .correlations h3 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .correlation-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #d1d5db;
+        }
+
+        .correlation-item:last-child {
+            border-bottom: none;
+        }
+
+        .correlation-label {
+            color: #555;
+            font-weight: 500;
+        }
+
+        .correlation-value {
+            background: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            color: #1e3a8a;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Charts */
+        .charts-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .charts-section h2 {
+            color: #1e3a8a;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .charts-section h2::before {
+            content: "📈";
+        }
+
+        .chart-container {
+            width: 100%;
+            text-align: center;
+        }
+
+        .chart-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Metrics List */
+        .metrics-list {
+            background: linear-gradient(135deg, #f0fdf4 0%, #f0f9ff 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .metrics-list h4 {
+            color: #059669;
+            margin-bottom: 12px;
+            font-size: 1.1em;
+        }
+
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            color: #555;
+            border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .metric-row:last-child {
+            border-bottom: none;
+        }
+
+        .metric-label {
+            font-weight: 600;
+            color: #1e3a8a;
+        }
+
+        .metric-value {
+            color: #059669;
+            font-weight: 500;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Chart Tabs */
+        .chart-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .chart-tab {
+            padding: 12px 20px;
+            border: 2px solid #10b981;
+            background: white;
+            color: #10b981;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.95em;
+        }
+
+        .chart-tab:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .chart-tab.active {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(16, 185, 129, 0.3);
+            border-radius: 50%;
+            border-top: 3px solid #10b981;
+            animation: spin 0.6s linear infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        /* Toggle Filters */
+        .filter-section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #ecfdf5 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #10b981;
+        }
+
+        .filter-section h3 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 12px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+            accent-color: #10b981;
+        }
+
+        .checkbox-item label {
+            cursor: pointer;
+            color: #555;
+            font-weight: 500;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: linear-gradient(135deg, #dbeafe 0%, #dcfce7 100%);
+            border-left: 4px solid #3b82f6;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            color: #1e3a8a;
+        }
+
+        .info-box strong {
+            color: #1e40af;
+        }
+
+        footer p {
+            font-size: 0.95em;
+            opacity: 0.9;
+        }
+
+        footer a {
+            color: #4ade80;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Risk Indicators */
+        .risk-alert {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            border-left: 4px solid #ef4444;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .risk-alert strong {
+            color: #dc2626;
+        }
+
+        .risk-alert em {
+            color: #991b1b;
+            font-style: normal;
+        }
+
+        /* Success Indicators */
+        .success-highlight {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border-left: 4px solid #22c55e;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .success-highlight strong {
+            color: #16a34a;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 25px;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 12px;
+            }
+
+            .insights-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .charts-section {
+                padding: 20px;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stat-card, .insight-card, .charts-section {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .stat-card:nth-child(1) { animation-delay: 0.1s; }
+        .stat-card:nth-child(2) { animation-delay: 0.2s; }
+        .stat-card:nth-child(3) { animation-delay: 0.3s; }
+        .stat-card:nth-child(4) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>RIFT - Agricultural Intelligence</h1>
+            <p>Data-Driven Insights for Climate-Smart Farming</p>
+        </header>
+
+        <!-- Key Metrics -->
+        <div class="stats-grid">
+            <div class="stat-card blue">
+                <h3>📊 Dataset Size</h3>
+                <div class="value">{{ metrics.total_observations }}</div>
+                <div class="unit">observations across {{ metrics.crops }} crops</div>
+            </div>
+            <div class="stat-card green">
+                <h3>🌡️ Temperature Range</h3>
+                <div class="value">{{ metrics.temp_range }}</div>
+                <div class="unit">Global climate span</div>
+            </div>
+            <div class="stat-card orange">
+                <h3>🌧️ Rainfall Range</h3>
+                <div class="value">{{ metrics.rainfall_range }}</div>
+                <div class="unit">Seasonal variation</div>
+            </div>
+            <div class="stat-card purple">
+                <h3>🌾 Yield Performance</h3>
+                <div class="value">{{ metrics.yield_range }}</div>
+                <div class="unit">Best: {{ metrics.best_crop }} ({{ metrics.best_crop_yield }})</div>
+            </div>
+            <div class="stat-card red">
+                <h3>💰 Market Pricing</h3>
+                <div class="value">{{ metrics.price_range }}</div>
+                <div class="unit">Dynamic pricing insight</div>
+            </div>
+        </div>
+
+        <!-- Main Insights Section -->
+        <div class="insights-section">
+            <h2>Key Findings & Recommendations</h2>
+            
+            <div class="correlations">
+                <h3>🔗 Statistical Correlations</h3>
+                <div class="correlation-item">
+                    <span class="correlation-label">Temperature ↔ Yield</span>
+                    <span class="correlation-value">{{ metrics.temp_yield_corr }}</span>
+                </div>
+                <div class="correlation-item">
+                    <span class="correlation-label">Yield ↔ Price (Inverse)</span>
+                    <span class="correlation-value">{{ metrics.yield_price_corr }}</span>
+                </div>
+                <div class="correlation-item">
+                    <span class="correlation-label">Demand ↔ Price</span>
+                    <span class="correlation-value">{{ metrics.demand_price_corr }}</span>
+                </div>
+            </div>
+
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <h4>⚠️ Climate Risks</h4>
+                    <p><strong>Drought Events:</strong> {{ metrics.drought_events }}</p>
+                    <p>Rainfall below 30mm poses critical drought risk. Implement irrigation strategy in {{ 20 }}% of growing season.</p>
+                </div>
+                
+                <div class="insight-card">
+                    <h4>📈 Market Opportunities</h4>
+                    <p><strong>High Demand Spikes:</strong> {{ metrics.high_demand_spikes }}</p>
+                    <p>Identified peak demand windows - premium pricing available during {{ 17 }}% of market days. Lock in contracts early.</p>
+                </div>
+
+                <div class="insight-card">
+                    <h4>💡 Price Strategy</h4>
+                    <p><strong>Inverse Relationship:</strong> {{ metrics.yield_price_corr }}</p>
+                    <p>High yields suppress prices (oversupply). Strong correlation (-0.820) suggests storage strategy or crop diversification.</p>
+                </div>
+            </div>
+
+            <!-- Risk & Success Alerts -->
+            <div class="risk-alert">
+                <strong>⚠️ Critical Action:</strong> <em>{{ metrics.drought_events }}</em> of observations show drought conditions. Early drought detection systems can save 15-30% of yield losses.
+            </div>
+
+            <div class="success-highlight">
+                <strong>✅ Optimization Opportunity:</strong> <em>{{ metrics.best_crop }}</em> shows best performance at <em>{{ metrics.best_crop_yield }}</em> kg/hectare. Consider expanding cultivation in favorable zones.
+            </div>
+
+            <!-- Metrics Summary -->
+            <div class="metrics-list">
+                <h4>📋 Complete Data Summary</h4>
+                <div class="metric-row">
+                    <span class="metric-label">Total Observations:</span>
+                    <span class="metric-value">{{ metrics.total_observations }}</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Crop Varieties:</span>
+                    <span class="metric-value">{{ metrics.crops }}</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Demand Range:</span>
+                    <span class="metric-value">{{ metrics.demand_range }} kg</span>
+                </div>
+                <div class="metric-row">
+                    <span class="metric-label">Market Volatility:</span>
+                    <span class="metric-value">Highly Dynamic</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="charts-section">
+            <h2>Comprehensive Analysis Dashboard</h2>
+            
+            <div class="info-box">
+                <strong>💡 Interactive Charts:</strong> Click on any tab below to explore different perspectives of the agricultural data. Each chart reveals unique insights about climate impacts, market dynamics, and risk factors.
+            </div>
+
+            <!-- Chart Selection Tabs -->
+            <div class="chart-tabs">
+                <button class="chart-tab active" onclick="loadChart('overview')">
+                    📊 Overview (6-Panel)
+                </button>
+                <button class="chart-tab" onclick="loadChart('climate')">
+                    🌡️ Climate Analysis
+                </button>
+                <button class="chart-tab" onclick="loadChart('market')">
+                    💰 Market Dynamics
+                </button>
+                <button class="chart-tab" onclick="loadChart('crops')">
+                    🌾 Crop Performance
+                </button>
+                <button class="chart-tab" onclick="loadChart('risk')">
+                    ⚠️ Risk Assessment
+                </button>
+            </div>
+
+            <!-- Chart Container -->
+            <div class="chart-container" id="chartContainer">
+                <img id="chartImage" src="data:image/png;base64,{{ chart_img }}" alt="Agricultural Analysis Charts">
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>🚜 <strong>RIFT Agricultural Data Science Platform</strong></p>
+            <p>Powered by Data Science | Climate-Smart Farming Solutions</p>
+            <p style="margin-top: 15px; font-size: 0.85em;">
+                Helping farmers anticipate demand • Predict pricing • Manage climate risks
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        let currentChart = 'overview';
+
+        function loadChart(chartType) {
+            // Update active tab
+            document.querySelectorAll('.chart-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Show loading spinner
+            const container = document.getElementById('chartContainer');
+            const image = document.getElementById('chartImage');
+            image.style.opacity = '0.5';
+            
+            // Fetch new chart
+            fetch(`/api/chart/${chartType}`)
+                .then(response => response.json())
+                .then(data => {
+                    image.src = 'data:image/png;base64,' + data.chart;
+                    image.style.opacity = '1';
+                    currentChart = chartType;
+                })
+                .catch(error => {
+                    console.error('Error loading chart:', error);
+                    image.style.opacity = '1';
+                });
+        }
+
+        // Chart descriptions
+        const chartDescriptions = {
+            'overview': '6-panel comprehensive view: Temperature impact, rainfall patterns, price dynamics, crop comparison, demand trends, price volatility',
+            'climate': 'Climate conditions analysis - How temperature and rainfall interact across the 1050 observations',
+            'market': 'Market dynamics - Relationship between demand and pricing with trend analysis',
+            'crops': 'Crop performance comparison - Average yields for each crop variety',
+            'risk': 'Risk assessment dashboard - Drought events, low yield periods, and price volatility risks'
+        };
+
+        // Update info on tab hover
+        document.querySelectorAll('.chart-tab').forEach(tab => {
+            tab.addEventListener('mouseenter', function() {
+                const chartType = this.textContent.split(' ')[0].toLowerCase();
+            });
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(event) {
+            if (event.key === '1') loadChart('overview');
+            if (event.key === '2') loadChart('climate');
+            if (event.key === '3') loadChart('market');
+            if (event.key === '4') loadChart('crops');
+            if (event.key === '5') loadChart('risk');
+        });
+    </script>
+</body>
+</html>
